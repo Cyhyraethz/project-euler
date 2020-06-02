@@ -6,18 +6,21 @@
   </head>
   <body>
     <script>
-      const sumOfMultiples = (num, multiples) => {
+      const sumOfMultiples = (num, base) => {
+        let multiples = [];
         let sum = 0;
         for (let i = 1; i < num; i++) {
-          for (let j = 0; j < multiples.length; j++) {
-            if (i % multiples[j] === 0) {
-              sum += i;
+          base.forEach((num) => {
+            if (i % num === 0 && multiples.indexOf(i) < 0) {
+              multiples.push(i);
             }
-          }
+          });
         }
+        multiples.forEach((num) => {
+          sum += num;
+        });
         return sum;
       };
-
       console.log(sumOfMultiples(1000, [3, 5]));
     </script>
   </body>
