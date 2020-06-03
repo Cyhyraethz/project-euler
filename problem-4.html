@@ -6,9 +6,26 @@
   </head>
   <body>
     <script>
-      const largestPalindromeProduct = () => {
+      const largestPalindromeProduct = (digits) => {
         //
       };
+      const palindromeCheck = (num) => {
+        let arr = [];
+        let str = num.toString();
+        for (let i = 0; i < str.length; i++) {
+          arr.push(str[i]);
+        }
+        let half = Math.floor(str.length / 2);
+        let first = arr.splice(0, half).join('');
+        arr.reverse();
+        last = arr.splice(0, half).join('');
+        if (first === last) {
+          return true;
+        } else {
+          return false;
+        }
+      };
+      // console.log(largestPalindromeProduct(2));
     </script>
   </body>
 </html>
