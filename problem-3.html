@@ -6,9 +6,15 @@
   </head>
   <body>
     <script>
-      const primeFactor = () => {
-        //
+      const largestPrimeFactor = (num) => {
+        for (let i = 2; i < num; i++) {
+          if (num % i === 0) {
+            num = num / i;
+          }
+        }
+        return num;
       };
+      console.log(largestPrimeFactor(600851475143));
     </script>
   </body>
 </html>
