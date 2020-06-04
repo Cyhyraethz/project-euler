@@ -6,9 +6,30 @@
   </head>
   <body>
     <script>
-      const smallestMultiple = () => {
-        //
+      const findSmallestMultiple = (largestFactor) => {
+        let start = window.performance.now();
+        let smallestMultiple = largestFactor;
+        while (checkIfSmallestMultiple(smallestMultiple, largestFactor)) {
+          smallestMultiple++;
+        }
+        let finish = window.performance.now();
+        console.log(
+          `Execution time: ${((finish - start) / 1000).toFixed(2)} seconds`
+        );
+        return smallestMultiple;
       };
+      const checkIfSmallestMultiple = (numToCheck, largestFactor) => {
+        for (let i = largestFactor; i > 0; i--) {
+          if (numToCheck % i === 0) {
+            continue;
+          } else {
+            return true;
+          }
+        }
+      };
+      console.log(findSmallestMultiple(20));
     </script>
   </body>
 </html>
+<!-- 4.25 seconds -->
+<!-- 3.18 seconds -->
