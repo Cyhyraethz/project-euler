@@ -7,12 +7,13 @@
   <body>
     <script>
       const findSmallestMultiple = (largestFactor) => {
-        let start = window.performance.now();
-        let smallestMultiple = largestFactor;
+        let start = performance.now();
+        let increment = largestFactor * (largestFactor - 1);
+        let smallestMultiple = largestFactor * (largestFactor - 1);
         while (checkIfSmallestMultiple(smallestMultiple, largestFactor)) {
-          smallestMultiple += largestFactor;
+          smallestMultiple += increment;
         }
-        let finish = window.performance.now();
+        let finish = performance.now();
         console.log(
           `Execution time: ${((finish - start) / 1000).toFixed(2)} seconds`
         );
@@ -34,3 +35,4 @@
 <!-- 4.25 seconds -->
 <!-- 3.18 seconds -->
 <!-- 0.32 seconds -->
+<!-- 0.03 seconds -->
