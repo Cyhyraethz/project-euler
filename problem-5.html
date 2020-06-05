@@ -10,7 +10,7 @@
         let start = window.performance.now();
         let smallestMultiple = largestFactor;
         while (checkIfSmallestMultiple(smallestMultiple, largestFactor)) {
-          smallestMultiple++;
+          smallestMultiple += largestFactor;
         }
         let finish = window.performance.now();
         console.log(
@@ -33,3 +33,4 @@
 </html>
 <!-- 4.25 seconds -->
 <!-- 3.18 seconds -->
+<!-- 0.32 seconds -->
