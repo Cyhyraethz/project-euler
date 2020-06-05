@@ -7,9 +7,34 @@
   <body>
     <script>
       const findPrimeNumber = (num) => {
-        //
+        let start = performance.now();
+        let listOfPrimeNumbers = [2];
+        let currentNumber = 3;
+        while (listOfPrimeNumbers.length < num) {
+          if (checkIfPrime(currentNumber, listOfPrimeNumbers) === false) {
+            currentNumber += 2;
+          } else {
+            listOfPrimeNumbers.push(currentNumber);
+            currentNumber += 2;
+          }
+        }
+        let finish = performance.now();
+        console.log(
+          `Execution time: ${((finish - start) / 1000).toFixed(2)} seconds`
+        );
+        return listOfPrimeNumbers[num - 1];
       };
-      console.log(findPrimeNumber(6));
+      const checkIfPrime = (currentNumber, listOfPrimeNumbers) => {
+        isPrime = true;
+        listOfPrimeNumbers.forEach((num) => {
+          if (currentNumber % num === 0) {
+            isPrime = false;
+          }
+        });
+        return isPrime;
+      };
+      console.log(findPrimeNumber(10001));
     </script>
   </body>
 </html>
+<!-- 2.67 seconds -->
