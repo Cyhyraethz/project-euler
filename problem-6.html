@@ -6,9 +6,24 @@
   </head>
   <body>
     <script>
-      const sumSquareDifference = () => {
-        //
+      const sumSquareDifference = (num) => {
+        return squareOfSum(num) - sumOfSquare(num);
       };
+      const sumOfSquare = (num) => {
+        let sum = 0;
+        for (let i = num; i > 0; i--) {
+          sum += Math.pow(i, 2);
+        }
+        return sum;
+      };
+      const squareOfSum = (num) => {
+        let sum = 0;
+        for (let i = num; i > 0; i--) {
+          sum += i;
+        }
+        return Math.pow(sum, 2);
+      };
+      console.log(sumSquareDifference(100));
     </script>
   </body>
 </html>
