@@ -6,12 +6,46 @@
   </head>
   <body>
     <script>
-      const specialPythagoreanTriplet = (sum) => {
+      const findSpecialPythagoreanTriplet = (sum) => {
         const start = performance.now();
+        let pythagoreanTripletProduct;
+        let pythagoreanTripletSum;
+        let m = 2;
+        let n = 1;
+        while (m < sum) {
+          while (n < m) {
+            pythagoreanTripletSum = findPythagoreanTripletSum(m, n);
+            pythagoreanTripletProduct = findPythagoreanTripletProduct(m, n);
+            if (pythagoreanTripletSum === sum || pythagoreanTripletSum > sum) {
+              break;
+            }
+            n++;
+          }
+          if (pythagoreanTripletSum === sum) {
+            break;
+          } else {
+            n = 1;
+            m++;
+          }
+        }
         const finish = performance.now();
         console.log(`Execution time: ${Math.round(finish - start)} ms`);
+        return pythagoreanTripletProduct;
       };
-      // console.log(specialPythagoreanTriplet(1000));
+      const findPythagoreanTripletSum = (m, n) => {
+        const a = m ** 2 - n ** 2;
+        const b = 2 * m * n;
+        const c = m ** 2 + n ** 2;
+        return a + b + c;
+      };
+      const findPythagoreanTripletProduct = (m, n) => {
+        const a = m ** 2 - n ** 2;
+        const b = 2 * m * n;
+        const c = m ** 2 + n ** 2;
+        return a * b * c;
+      };
+      console.log(findSpecialPythagoreanTriplet(1000));
     </script>
   </body>
 </html>
+<!-- 0 ms -->
