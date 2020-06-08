@@ -25,11 +25,12 @@
       };
       const checkIfPrime = (currentNumber, listOfPrimeNumbers) => {
         isPrime = true;
-        listOfPrimeNumbers.forEach((num) => {
-          if (currentNumber % num === 0) {
+        for (let i = 0; i < listOfPrimeNumbers.length; i++) {
+          if (currentNumber % listOfPrimeNumbers[i] === 0) {
             isPrime = false;
+            break;
           }
-        });
+        }
         return isPrime;
       };
       console.log(findSumOfPrimes(2000000));
@@ -37,3 +38,4 @@
   </body>
 </html>
 <!-- 844657 ms -->
+<!-- 135313 ms -->
