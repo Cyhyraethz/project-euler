@@ -12,7 +12,20 @@
         const finish = performance.now();
         console.log(`Execution time: ${Math.round(finish - start)} ms`);
       };
-      console.log(largestProductInGrid());
+      console.log(largestProductInGrid(/* enter grid here */));
+      const getAverageExecutionTime = (func, args, reps) => {
+        let executionTime = 0;
+        for (let i = 0; i < reps; i++) {
+          const start = performance.now();
+          func(args);
+          const finish = performance.now();
+          executionTime += finish - start;
+        }
+        console.log(
+          `Average execution time: ${Math.round(executionTime / reps)} ms`
+        );
+      };
+      // getAverageExecutionTime(largestProductInGrid, /* enter grid here */, 100);
     </script>
   </body>
 </html>
