@@ -8,10 +8,32 @@
     <script>
       const findSumOfPrimes = (num) => {
         const start = performance.now();
+        const listOfPrimeNumbers = [2];
+        let currentNumber = 3;
+        while (currentNumber < num) {
+          if (checkIfPrime(currentNumber, listOfPrimeNumbers) === false) {
+            currentNumber += 2;
+          } else {
+            listOfPrimeNumbers.push(currentNumber);
+            console.log(currentNumber);
+            currentNumber += 2;
+          }
+        }
         const finish = performance.now();
         console.log(`Execution time: ${Math.round(finish - start)} ms`);
+        return listOfPrimeNumbers.reduce((a, b) => a + b);
       };
-      console.log(findSumOfPrimes(10));
+      const checkIfPrime = (currentNumber, listOfPrimeNumbers) => {
+        isPrime = true;
+        listOfPrimeNumbers.forEach((num) => {
+          if (currentNumber % num === 0) {
+            isPrime = false;
+          }
+        });
+        return isPrime;
+      };
+      console.log(findSumOfPrimes(2000000));
     </script>
   </body>
 </html>
+<!-- 844657 ms -->
