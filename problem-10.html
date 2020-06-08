@@ -6,36 +6,50 @@
   </head>
   <body>
     <script>
-      const findSumOfPrimes = (num) => {
+      const findSumOfPrimes = (limit) => {
         const start = performance.now();
-        const listOfPrimeNumbers = [2];
-        let currentNumber = 3;
-        while (currentNumber < num) {
-          if (checkIfPrime(currentNumber, listOfPrimeNumbers) === false) {
-            currentNumber += 2;
-          } else {
-            listOfPrimeNumbers.push(currentNumber);
-            console.log(currentNumber);
-            currentNumber += 2;
+        const prime = [null, null];
+        let total = 0;
+        for (let i = 0; i < limit; i++) {
+          prime.push(true);
+        }
+        for (let i = 2; i < Math.sqrt(limit); i++) {
+          if (prime[i]) {
+            let multiplier = 2;
+            let currentNumber = i;
+            while (currentNumber < limit) {
+              currentNumber = i * multiplier;
+              prime[currentNumber] = false;
+              multiplier++;
+            }
+          }
+        }
+        for (let i = 2; i < limit; i++) {
+          if (prime[i]) {
+            total += i;
           }
         }
         const finish = performance.now();
         console.log(`Execution time: ${Math.round(finish - start)} ms`);
-        return listOfPrimeNumbers.reduce((a, b) => a + b);
-      };
-      const checkIfPrime = (currentNumber, listOfPrimeNumbers) => {
-        isPrime = true;
-        for (let i = 0; i < listOfPrimeNumbers.length; i++) {
-          if (currentNumber % listOfPrimeNumbers[i] === 0) {
-            isPrime = false;
-            break;
-          }
-        }
-        return isPrime;
+        return total;
       };
       console.log(findSumOfPrimes(2000000));
+      const getAverageExecutionTime = (func, args, reps) => {
+        let executionTime = 0;
+        for (let i = 0; i < reps; i++) {
+          const start = performance.now();
+          func(args);
+          const finish = performance.now();
+          executionTime += finish - start;
+        }
+        console.log(
+          `Average execution time: ${Math.round(executionTime / reps)} ms`
+        );
+      };
+      // getAverageExecutionTime(findSumOfPrimes, 2000000, 100);
     </script>
   </body>
 </html>
 <!-- 844657 ms -->
 <!-- 135313 ms -->
+<!-- 110 ms -->
