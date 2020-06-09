@@ -55,28 +55,84 @@
         }
         return largestProduct;
       };
+      const findLargestVerticalProduct = (gridArray, num) => {
+        let largestProduct = 0;
+        for (let i = 0; i < gridArray[0].length; i++) {
+          for (let j = 0; j <= gridArray.length - num; j++) {
+            let currentProduct = 1;
+            for (let k = 0; k < num; k++) {
+              currentProduct *= gridArray[j + k][i];
+            }
+            if (currentProduct > largestProduct) {
+              largestProduct = currentProduct;
+            }
+          }
+        }
+        return largestProduct;
+      };
+      const findLargestDiagonalProduct = (gridArray, num) => {
+        let largestProduct = 0;
+        for (let i = 0; i < gridArray[0].length - num; i++) {
+          for (let j = 0; j <= gridArray.length - num; j++) {
+            let currentProduct = 1;
+            for (let k = 0; k < num; k++) {
+              currentProduct *= gridArray[j + k][i + k];
+            }
+            if (currentProduct > largestProduct) {
+              largestProduct = currentProduct;
+            }
+          }
+        }
+        for (let i = gridArray[0].length - 1; i > num - 2; i--) {
+          for (let j = 0; j <= gridArray.length - num; j++) {
+            let currentProduct = 1;
+            for (let k = 0; k < num; k++) {
+              currentProduct *= gridArray[j + k][i - k];
+            }
+            if (currentProduct > largestProduct) {
+              largestProduct = currentProduct;
+            }
+          }
+        }
+        return largestProduct;
+      };
       const findLargestProductInGrid = (gridArray, num) => {
         const start = performance.now();
-        let largestProduct = findLargestHorizontalProduct(gridArray, num);
+        let largestProduct = 0;
+        let horizontalProduct = findLargestHorizontalProduct(gridArray, num);
+        if (horizontalProduct > largestProduct) {
+          largestProduct = horizontalProduct;
+        }
+        let verticalProduct = findLargestVerticalProduct(gridArray, num);
+        if (verticalProduct > largestProduct) {
+          largestProduct = verticalProduct;
+        }
+        let diagonalProduct = findLargestDiagonalProduct(gridArray, num);
+        if (diagonalProduct > largestProduct) {
+          largestProduct = findLargestDiagonalProduct(gridArray, num);
+        }
         const finish = performance.now();
         console.log(`Execution time: ${Math.round(finish - start)} ms`);
         return largestProduct;
       };
       console.log(findLargestProductInGrid(gridArray, 4));
-      // const getAverageExecutionTime = (func, reps, ...args) => {
-      //   let executionTime = 0;
-      //   for (let i = 0; i < reps; i++) {
-      //     const start = performance.now();
-      //     func(...args);
-      //     const finish = performance.now();
-      //     executionTime += finish - start;
-      //   }
-      //   console.log(
-      //     `Average execution time: ${Math.round(executionTime / reps)} ms`
-      //   );
-      // };
+      const getAverageExecutionTime = (func, reps, ...args) => {
+        let executionTime = 0;
+        for (let i = 0; i < reps; i++) {
+          const start = performance.now();
+          func(...args);
+          const finish = performance.now();
+          executionTime += finish - start;
+        }
+        console.log(
+          `Average execution time: ${Math.round(executionTime / reps)} ms`
+        );
+      };
       // getAverageExecutionTime(findLargestProductInGrid, 100, gridArray, 4);
     </script>
   </body>
 </html>
 <!-- largest horizontal product is 48477312 -->
+<!-- largest vertical product is 51267216 -->
+<!-- largest diagonal product is 70600674 -->
+<!-- largest product in grid is 70600674 -->
