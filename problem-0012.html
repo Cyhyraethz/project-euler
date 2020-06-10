@@ -9,24 +9,23 @@
       const findTriangularNumber = (minimumDivisors) => {
         const start = performance.now();
         let currentDivisors = 0;
-        let triangleNumber = 0;
+        let triangularNumber = 0;
         let nextNumber = 1;
         while (currentDivisors <= minimumDivisors) {
-          currentDivisors = 1;
-          triangleNumber = triangleNumber + nextNumber;
-          for (let i = 2; i <= triangleNumber; i++) {
-            if (triangleNumber % i === 0) {
-              currentDivisors += 1;
+          currentDivisors = 2;
+          triangularNumber = triangularNumber + nextNumber;
+          for (let i = 2; i <= Math.floor(Math.sqrt(triangularNumber)); i++) {
+            if (triangularNumber % i === 0) {
+              currentDivisors += 2;
             }
           }
-          console.log(triangleNumber + ' has ' + currentDivisors + ' disivors')
           nextNumber += 1;
         }
         const finish = performance.now();
         console.log(`Execution time: ${Math.round(finish - start)} ms`);
-        return triangleNumber;
+        return triangularNumber;
       };
-      // console.log(findTriangularNumber(200));
+      console.log(findTriangularNumber(500));
       const getAverageExecutionTime = (func, reps, ...args) => {
         let executionTime = 0;
         for (let i = 0; i < reps; i++) {
@@ -39,8 +38,9 @@
           `Average execution time: ${Math.round(executionTime / reps)} ms`
         );
       };
-      // getAverageExecutionTime(findTriangularNumber, 100, 5);
+      // getAverageExecutionTime(findTriangularNumber, 100, 500);
     </script>
   </body>
 </html>
-<!-- findTriangularNumber(200) = 14687 ms -->
+<!-- 645 ms -->
+<!-- 76576500 -->
