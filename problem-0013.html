@@ -1,0 +1,30 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const placeholderFunction = (args) => {
+        const start = performance.now();
+        const finish = performance.now();
+        console.log(`Execution time: ${Math.round(finish - start)} ms`);
+      };
+      console.log(placeholderFunction(args));
+      const getAverageExecutionTime = (func, reps, ...args) => {
+        let executionTime = 0;
+        for (let i = 0; i < reps; i++) {
+          const start = performance.now();
+          func(...args);
+          const finish = performance.now();
+          executionTime += finish - start;
+        }
+        console.log(
+          `Average execution time: ${Math.round(executionTime / reps)} ms`
+        );
+      };
+      // getAverageExecutionTime(func, reps, args);
+    </script>
+  </body>
+</html>
