@@ -17,7 +17,7 @@
         });
         return numberArrays;
       };
-      const carryOver = generateNumberArray(
+      let carryOver = generateNumberArray(
         '00000000000000000000000000000000000000000000000000'
       )[0];
       const numberArrays = generateNumberArray(
@@ -122,8 +122,18 @@
         '20849603980134001723930671666823555245252804609722',
         '53503534226472524250874054075591789781264330331690'
       );
+      const consolidateNumberArray = (numberArray) => {
+        for (let i = 1; i <= numberArray.length; i++) {
+          while (numberArray[numberArray.length - i] > 9) {
+            numberArray[numberArray.length - i] -= 10;
+            numberArray[numberArray.length - (i + 1)] += 1;
+          }
+        }
+        return numberArray;
+      };
       const calculateLargeSum = (numberArrays) => {
         const start = performance.now();
+        let counter = 0;
         while (numberArrays[0].length > 10) {
           let workingNumber = 0;
           numberArrays.forEach((numberArray) => {
@@ -135,19 +145,37 @@
             workingArray[i] = parseInt(workingArray[i]);
           }
           for (let i = 1; i <= workingArray.length; i++) {
-            carryOver[carryOver.length - i] +=
+            carryOver[carryOver.length - (i + counter)] +=
               workingArray[workingArray.length - i];
           }
+          counter++;
         }
+        carryOver = consolidateNumberArray(carryOver);
+        while (carryOver.length > 10) {
+          carryOver.pop();
+        }
+        for (let i = 0; i < numberArrays.length; i++) {
+          numberArrays[i] = parseInt(numberArrays[i].join(''));
+        }
+        let sum = numberArrays
+          .reduce((a, b) => a + b)
+          .toString()
+          .split('');
+        for (let i = 0; i < sum.length; i++) {
+          sum[i] = parseInt(sum[i]);
+        }
+        for (let i = 0; i < carryOver.length; i++) {
+          sum[i] += carryOver[i];
+        }
+        while (sum.length > 10) {
+          sum.pop();
+        }
+        sum = parseInt(consolidateNumberArray(sum).join(''));
         const finish = performance.now();
         console.log(`Execution time: ${Math.round(finish - start)} ms`);
-        return carryOver;
+        return sum;
       };
       console.log(calculateLargeSum(numberArrays));
-      // let numArr1 = [2, 2, 2];
-      // let numArr2 = [2, 2, 2];
-      // numArr1[0] += numArr2[0];
-      // console.log(numArr1[0]);
       const getAverageExecutionTime = (func, reps, ...args) => {
         let executionTime = 0;
         for (let i = 0; i < reps; i++) {
