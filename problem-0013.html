@@ -134,7 +134,7 @@
       const calculateLargeSum = (numberArrays) => {
         const start = performance.now();
         let counter = 0;
-        while (numberArrays[0].length > 10) {
+        while (numberArrays[0].length > 2) {
           let workingNumber = 0;
           numberArrays.forEach((numberArray) => {
             workingNumber += numberArray[numberArray.length - 1];
@@ -154,26 +154,10 @@
         while (carryOver.length > 10) {
           carryOver.pop();
         }
-        for (let i = 0; i < numberArrays.length; i++) {
-          numberArrays[i] = parseInt(numberArrays[i].join(''));
-        }
-        let sum = numberArrays
-          .reduce((a, b) => a + b)
-          .toString()
-          .split('');
-        for (let i = 0; i < sum.length; i++) {
-          sum[i] = parseInt(sum[i]);
-        }
-        for (let i = 0; i < carryOver.length; i++) {
-          sum[i] += carryOver[i];
-        }
-        while (sum.length > 10) {
-          sum.pop();
-        }
-        sum = parseInt(consolidateNumberArray(sum).join(''));
+        carryOver = parseInt(carryOver.join(''));
         const finish = performance.now();
         console.log(`Execution time: ${Math.round(finish - start)} ms`);
-        return sum;
+        return carryOver;
       };
       console.log(calculateLargeSum(numberArrays));
       const getAverageExecutionTime = (func, reps, ...args) => {
@@ -192,3 +176,4 @@
     </script>
   </body>
 </html>
+<!-- 4937623039 -->
