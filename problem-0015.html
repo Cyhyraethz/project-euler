@@ -6,12 +6,13 @@
   </head>
   <body>
     <script>
-      const placeholderFunction = (args) => {
+      const findLatticePaths = (horizontal, vertical) => {
         const start = performance.now();
+
         const finish = performance.now();
         console.log(`Execution time: ${Math.round(finish - start)} ms`);
       };
-      console.log(placeholderFunction(args));
+      console.log(findLatticePaths(2, 2));
       const getAverageExecutionTime = (func, reps, ...args) => {
         let executionTime = 0;
         for (let i = 0; i < reps; i++) {
@@ -24,7 +25,7 @@
           `Average execution time: ${Math.round(executionTime / reps)} ms`
         );
       };
-      // getAverageExecutionTime(func, reps, args);
+      // getAverageExecutionTime(findLatticePaths, 100, 20, 20);
     </script>
   </body>
 </html>
