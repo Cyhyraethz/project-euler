@@ -6,12 +6,39 @@
   </head>
   <body>
     <script>
-      const placeholderFunction = (args) => {
+      const findLongestCollatzSequence = (num) => {
         const start = performance.now();
+        let longestNumber = 0;
+        let longestChain = 0;
+        for (let i = 3; i < num; i++) {
+          let startingNumber = i;
+          let workingNumber = i;
+          let workingChain = 0;
+          while (workingNumber > 1) {
+            if (workingNumber % 2 === 0) {
+              while (workingNumber % 2 === 0) {
+                workingNumber /= 2;
+                workingChain++;
+              }
+            } else {
+              while (workingNumber % 2 !== 0) {
+                workingNumber *= 3;
+                workingNumber += 1;
+                workingChain++;
+              }
+            }
+          }
+          workingChain++;
+          if (workingChain > longestChain) {
+            longestNumber = startingNumber;
+            longestChain = workingChain;
+          }
+        }
         const finish = performance.now();
         console.log(`Execution time: ${Math.round(finish - start)} ms`);
+        return `${longestNumber} produces a ${longestChain} term sequence`;
       };
-      console.log(placeholderFunction(args));
+      console.log(findLongestCollatzSequence(1000000));
       const getAverageExecutionTime = (func, reps, ...args) => {
         let executionTime = 0;
         for (let i = 0; i < reps; i++) {
@@ -24,7 +51,8 @@
           `Average execution time: ${Math.round(executionTime / reps)} ms`
         );
       };
-      // getAverageExecutionTime(func, reps, args);
+      // getAverageExecutionTime(findLongestCollatzSequence, 10, 1000000);
     </script>
   </body>
 </html>
+<!-- 3526 ms -->
