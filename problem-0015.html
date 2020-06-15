@@ -8,11 +8,19 @@
     <script>
       const findLatticePaths = (horizontal, vertical) => {
         const start = performance.now();
-
+        const steps = horizontal + vertical;
+        let paths = 1;
+        for (let i = steps; i > steps / 2; i--) {
+          paths *= i;
+        }
+        for (let i = steps / 2; i > 0; i--) {
+          paths /= i;
+        }
         const finish = performance.now();
         console.log(`Execution time: ${Math.round(finish - start)} ms`);
+        return Math.floor(paths);
       };
-      console.log(findLatticePaths(2, 2));
+      console.log(findLatticePaths(20, 20));
       const getAverageExecutionTime = (func, reps, ...args) => {
         let executionTime = 0;
         for (let i = 0; i < reps; i++) {
