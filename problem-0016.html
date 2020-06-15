@@ -6,12 +6,13 @@
   </head>
   <body>
     <script>
-      const placeholderFunction = (args) => {
+      const findPowerDigitSum = (num, pow) => {
         const start = performance.now();
         const finish = performance.now();
         console.log(`Execution time: ${Math.round(finish - start)} ms`);
+        return Math.pow(num, pow);
       };
-      console.log(placeholderFunction(args));
+      console.log(findPowerDigitSum(2, 10));
       const getAverageExecutionTime = (func, reps, ...args) => {
         let executionTime = 0;
         for (let i = 0; i < reps; i++) {
