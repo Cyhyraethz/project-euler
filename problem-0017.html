@@ -6,12 +6,41 @@
   </head>
   <body>
     <script>
-      const placeholderFunction = (args) => {
+      const findNumberLetterCounts = (end) => {
         const start = performance.now();
+        const thousand = 'thousand';
+        const hundred = 'hundred';
+        let numberOfLetters = 0;
+        const singleDigitWords = [
+          'one',
+          'two',
+          'three',
+          'four',
+          'five',
+          'six',
+          'seven',
+          'eight',
+          'nine',
+        ];
+        const doubleDigitWords = [
+          'ten',
+          'twenty',
+          'thirty',
+          'fourty',
+          'fifty',
+          'sixty',
+          'seventy',
+          'eighty',
+          'ninety',
+        ];
+        for (let i = 1; i <= end; i++) {
+          numberOfLetters += singleDigitWords[i].length;
+        }
         const finish = performance.now();
         console.log(`Execution time: ${Math.round(finish - start)} ms`);
+        return numberOfLetters;
       };
-      console.log(placeholderFunction(args));
+      console.log(findNumberLetterCounts(5));
       const getAverageExecutionTime = (func, reps, ...args) => {
         let executionTime = 0;
         for (let i = 0; i < reps; i++) {
@@ -24,7 +53,7 @@
           `Average execution time: ${Math.round(executionTime / reps)} ms`
         );
       };
-      // getAverageExecutionTime(func, reps, args);
+      // getAverageExecutionTime(findNumberLetterCounts, 100, 1000);
     </script>
   </body>
 </html>
