@@ -6,13 +6,33 @@
   </head>
   <body>
     <script>
+      const consolidateNumberArray = (numberArray) => {
+        for (let i = 1; i <= numberArray.length; i++) {
+          while (numberArray[numberArray.length - i] > 9) {
+            numberArray[numberArray.length - i] -= 10;
+            if (numberArray.length - (i + 1) < 0) {
+              numberArray.unshift(0);
+            }
+            numberArray[numberArray.length - (i + 1)] += 1;
+          }
+        }
+        return numberArray;
+      };
       const findPowerDigitSum = (num, pow) => {
         const start = performance.now();
+        let numberArray = [num];
+        for (let i = 1; i < pow; i++) {
+          numberArray.unshift[0];
+          for (let j = 0; j < numberArray.length; j++) {
+            numberArray[j] += numberArray[j];
+          }
+          numberArray = consolidateNumberArray(numberArray);
+        }
         const finish = performance.now();
         console.log(`Execution time: ${Math.round(finish - start)} ms`);
-        return Math.pow(num, pow);
+        return numberArray.reduce((a, b) => a + b);
       };
-      console.log(findPowerDigitSum(2, 10));
+      console.log(findPowerDigitSum(2, 1000));
       const getAverageExecutionTime = (func, reps, ...args) => {
         let executionTime = 0;
         for (let i = 0; i < reps; i++) {
@@ -25,7 +45,8 @@
           `Average execution time: ${Math.round(executionTime / reps)} ms`
         );
       };
-      // getAverageExecutionTime(func, reps, args);
+      // getAverageExecutionTime(findPowerDigitSum, 100, 2, 1000);
     </script>
   </body>
 </html>
+<!-- 3 ms -->
