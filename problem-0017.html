@@ -24,7 +24,6 @@
           'nine',
         ];
         const teenNumberWords = [
-          'zero',
           'ten',
           'eleven',
           'twelve',
@@ -41,7 +40,7 @@
           'ten',
           'twenty',
           'thirty',
-          'fourty',
+          'forty',
           'fifty',
           'sixty',
           'seventy',
@@ -49,13 +48,12 @@
           'ninety',
         ];
         let numberOfLetters = 0;
-        // change 'i = end' to 'i = 1' to get letter count of full range of numbers
-        for (let i = end; i <= end; i++) {
+        for (let i = 1; i <= end; i++) {
           if (i < 10) {
             numberOfLetters += singleDigitWords[i].length;
           }
           if (i >= 10 && i < 20) {
-            let index = parseInt(i.toString()[0]);
+            let index = parseInt(i.toString()[1]);
             numberOfLetters += teenNumberWords[index].length;
           }
           if (i >= 20 && i < 100) {
@@ -68,7 +66,6 @@
               numberOfLetters += singleDigitWords[secondIndex].length;
             }
           }
-          // the problem seems to be with 'hundred and'
           if (i >= 100 && i < 1000) {
             let firstIndex = parseInt(i.toString()[0]);
             let secondIndex = parseInt(i.toString()[1]);
@@ -94,7 +91,6 @@
               numberOfLetters += doubleDigitWords[secondIndex].length;
             }
           }
-          // modify if statement below once 100-1000 is working properly
           if (i >= 1000 && i < 10000) {
             let firstIndex = parseInt(i.toString()[0]);
             let secondIndex = parseInt(i.toString()[1]);
@@ -113,13 +109,9 @@
               numberOfLetters += singleDigitWords[fourthIndex].length;
             }
           }
-          // modify if statement above once 100-1000 is working properly
         }
         const finish = performance.now();
         console.log(`Execution time: ${Math.round(finish - start)} ms`);
-        // test length of number word below here
-        console.log('onethousand'.length);
-        // test length of number word above here
         return numberOfLetters;
       };
       console.log(findNumberLetterCounts(1000));
@@ -139,3 +131,4 @@
     </script>
   </body>
 </html>
+<!-- 21124 -->
